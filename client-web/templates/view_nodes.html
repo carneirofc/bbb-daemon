@@ -50,7 +50,7 @@
             node_ip = $(this).attr('data-button');
             $.ajax({
                       type : 'POST',
-                      url : "{{url_for('view_nodes')}}",
+                      url : "{{ url_for('view_nodes') }}",
                       data : {'node_ip':node_ip}
 
             });

@@ -30,7 +30,7 @@ app.secret_key = "4dbae3052d7e8b16ebcfe8752f70a4efe68d2ae0558b4a1b25c5fd902284e5
 Bootstrap(app)
 nav = Nav(app)
 
-nav.register_element('my_navbar', Navbar('Navigation Bar',
+nav.register_element('my_navbar', Navbar('BBB Daemon System',
                                          View('Home', 'home'),
                                          Subgroup("Nodes", View('View Nodes', 'view_nodes'),
                                                   View('Edit / Insert', 'edit_nodes')),
@@ -42,7 +42,13 @@ nav.register_element('my_navbar', Navbar('Navigation Bar',
 @app.route("/")
 @app.route("/home/", methods=['GET', 'POST'])
 def home():
-    return render_template("index.html", configured_nodes=c_nodes, unconfigured_nodes=u_nodes)
+    refresh_url = url_for('refresh')
+    return render_template("index.html", refresh_url=refresh_url)
+
+
+@app.route('/refresh/', methods=['POST', 'GET'])
+def refresh():
+    return render_template("refresh_tables.html", configured_nodes=c_nodes, unconfigured_nodes=u_nodes)
 
 
 @app.route("/view_nodes/", methods=['GET', 'POST'])
@@ -59,7 +65,6 @@ def view_nodes():
 @app.route("/edit_nodes/", methods=['GET', 'POST'])
 @app.route("/edit_nodes/<node>/", methods=['GET', 'POST'])
 def edit_nodes(node=None):
-
     edit_nodes_form = EditNodeForm(obj=types)
     edit_nodes_form.type.choices = [(t.name, f"{t.name}\t{t.repoUrl}") for t in types]
 
