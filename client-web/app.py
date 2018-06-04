@@ -47,25 +47,29 @@ def home():
 
 @app.route("/view_nodes/", methods=['GET', 'POST'])
 def view_nodes():
+    if request.method == 'POST':
+        node_ip = request.form.get('node_ip')
+        print(f'{node_ip}')
+        if node_ip:
+            return redirect(url_for("edit_nodes", node=Node(ip=node_ip)))
+
     return render_template("view_nodes.html", nodes=nodes)
 
 
 @app.route("/edit_nodes/", methods=['GET', 'POST'])
-@app.route("/edit_nodes/<node_addr>", methods=['GET', 'POST'])
-def edit_nodes(node_addr=None):
+@app.route("/edit_nodes/<node>/", methods=['GET', 'POST'])
+def edit_nodes(node=None):
+
     edit_nodes_form = EditNodeForm(obj=types)
     edit_nodes_form.type.choices = [(t.name, f"{t.name}\t{t.repoUrl}") for t in types]
-    node = None
 
+    print(f'{node}')
     if request.method == 'POST':
-        node_ip = request.form.get('node_addr')
-        if node_ip:
-            node = Node(ip=node_ip)
-        elif edit_nodes_form.validate_on_submit():
+        if edit_nodes_form.validate_on_submit():
             flash(f"Successfully edited node {edit_nodes_form.ip_address.data} {edit_nodes_form.name.data}!", "success")
+            print('view nodes')
             return redirect(url_for("view_nodes"))
-        else:
-            flash(f"Failure !", "danger")
+
     return render_template("edit_node.html", node=node, form=edit_nodes_form)
 
 
