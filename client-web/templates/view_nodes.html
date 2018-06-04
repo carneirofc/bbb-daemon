@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content%}
+{{super()}}
+
+<div class="container">
+    <h1>View Nodes</h1>
+    <br>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">IP Address</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Sector</th>
+            <th scope="col">PV Prefix</th>
+            <th scope="col">State</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if nodes %}
+        {% for node in nodes %}
+        <tr>
+            <td>{{ node.ipAddress }}</td>
+            <td>{{ node.name }}</td>
+            <td>{{ node.type }}</td>
+            <td>{{ node.sector }}</td>
+            <td>{{ node.pvPrefix }}</td>
+            <td>{{ node.state }}</td>
+            <td>
+                <edit_button type="button" data-button={{node.ipAddress}} class="btn btn-info">Edit</edit_button>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{{super()}}
+<script>
+    $(document).ready(function(){
+        var node_ip;
+        $("edit_button").click(function(){
+            node_ip = $(this).attr('data-button');
+            $.ajax({
+                      type : 'POST',
+                      url : "{{url_for('edit_nodes')}}",
+                      data : {'node_ip':node_ip},
+                      success : function ( ) {
+                            window.location.href = "{{url_for('edit_nodes')}}"
+                      }
+            });
+        });
+    });
+</script>
+{% endblock %}

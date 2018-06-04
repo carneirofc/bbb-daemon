@@ -19,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for node in nodes %}
+        {% for node in configured_nodes %}
         <tr>
             <td>{{ node.ipAddress }}</td>
             <td>{{ node.name }}</td>
@@ -27,9 +27,6 @@
             <td>{{ node.sector }}</td>
             <td>{{ node.pvPrefix }}</td>
             <td>{{ node.state }}</td>
-            <td>
-                <button type="button" class="btn btn-info">Edit</button>
-            </td>
         </tr>
         {% endfor %}
         </tbody>
@@ -47,7 +44,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for node in nodes %}
+        {% for node in unconfigured_nodes %}
         <tr>
             <td>{{ node.ipAddress }}</td>
             <td>{{ node.name }}</td>
@@ -55,9 +52,6 @@
             <td>{{ node.sector }}</td>
             <td>{{ node.pvPrefix }}</td>
             <td>{{ node.state }}</td>
-            <td>
-                <button type="button" class="btn btn-info">Edit</button>
-            </td>
         </tr>
         {% endfor %}
         </tbody>
