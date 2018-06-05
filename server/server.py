@@ -20,7 +20,7 @@ WORKERS_NUM = 10
 if __name__ == '__main__':
     print(
         "arg[1]=REDIS_SERVER_IP\targ[2]=REDIS_SERVER_PORT\targ[3]=BBB_UDP\targ[4]=BBB_TCP\targ[5]=COM_INTERFACE_TCP\targ[6]=WORKERS_NUM")
-    if len(sys.argv) is not 6 or len(sys.argv) is not 7 :
+    if len(sys.argv) is not 6 or len(sys.argv) is not 7:
         print("using: {}:{}:{}:{} ".format(REDIS_SERVER_IP, REDIS_SERVER_PORT, BBB_UDP, BBB_TCP,
                                            COM_INTERFACE_TCP))
         print("WORKERS={}".format(WORKERS_NUM))

@@ -14,5 +14,5 @@ export PYTHONPATH="$(dirname $PWD)"
 
 #export WORKERS_NUM=10
 
-python3 /root/bbb-daemon/server/server.py $REDIS_SERVER_IP $BBB_PING_PORT $REDIS_SERVER_PORT $BBB_UDP $BBB_TCP $COM_INTERFACE_TCP $WORKERS_NUM
+python3 /root/bbb-daemon/server/server.py $REDIS_SERVER_IP $REDIS_SERVER_PORT $BBB_UDP $BBB_TCP $COM_INTERFACE_TCP $WORKERS_NUM
 
