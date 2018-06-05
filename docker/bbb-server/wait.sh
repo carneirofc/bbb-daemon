@@ -5,7 +5,7 @@ cd /root/wait-for-it/
 echo "Redis is UP!"
 cd /root/bbb-daemon/
 
-if [ ${$CHECKOUT_BRANCH+x} ]; then
+if [ ${CHECKOUT_BRANCH+x} ]; then
 	git checkout $CHECKOUT_BRANCH
 fi
 
